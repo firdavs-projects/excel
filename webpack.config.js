@@ -23,7 +23,6 @@ const jsLoaders = () => {
   return loaders
 }
 
-
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
@@ -64,7 +63,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: filename('css')
     }),
-
   ],
   module: {
     rules: [
