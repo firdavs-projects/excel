@@ -12,3 +12,26 @@ export const roundNum = (number) => {
     }
     return Math.floor(number)
 }
+
+export function range(start, end) {
+    if (start > end) {
+        [end, start] = [start, end]
+    }
+    return new Array(end - start + 1)
+        .fill('')
+        .map((_, i) => start + i)
+}
+
+export function increaseNum(a, max) {
+    if (+a === +max) {
+        return +a
+    }
+    return +a + 1
+}
+
+export function reduceNum(a) {
+    if (+a === 0) {
+        return +a
+    }
+    return +a - 1
+}
