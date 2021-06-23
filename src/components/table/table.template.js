@@ -3,25 +3,31 @@ const CODES = {
     Z: 90
 }
 
-function createCell() {
+function createCell(_, i) {
     return `
-    <div class="cell" contenteditable></div>
+    <div class="cell" contenteditable data-col="${i}"></div>
     `
 }
 
-function createCol(col) {
+function createCol(col, i) {
     return `
-        <div class="column">${col}</div>
+        <div class="column" data-type="resizable" data-col="${i}">
+            ${col}
+            <div class="col-resize" data-resize="col"></div>
+        </div>
     `
 }
 
 function createRow(content, i) {
     return `
-    <div class="row">
-        <div class="row-info">${i ? i : ''}</div>
+    <div class="row" data-type="resizable">
+        <div class="row-info">
+            ${i ? i : ''}
+            ${i ? '<div class="row-resize" data-resize="row"></div>' : ''}
+        </div>
         <div class="row-data">${content}</div>
     </div>
-`
+    `
 }
 
 function toChar(_, index) {
