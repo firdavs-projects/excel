@@ -22,7 +22,7 @@ function createCell(row, {colState, dataState, stylesState}) {
     return function (_, col) {
         const id = `${row}:${col}`
         const width = getWidth(colState, col)
-        const data = dataState[id] || ''
+        const data = dataState[id]
         const styles = toInlineStyles({
             ...defaultStyles,
             ...stylesState[id]
@@ -35,8 +35,8 @@ function createCell(row, {colState, dataState, stylesState}) {
             data-col="${col}" 
             data-type="cell"
             data-id="${id}"
-            data-value="${data}"
-        >${parse(data)}</div>
+            data-value="${data || ''}"
+        >${parse(data || '')}</div>
         `
     }
 }

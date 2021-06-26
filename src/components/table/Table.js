@@ -36,14 +36,22 @@ export class Table extends ExcelComponent {
         this.selectCell(this.$root.find('[data-id="0:0"]'))
 
         this.$on(constants.formulaInput, (value = '') => {
-            console.log(this.selection.current, value)
             this.selection.current
                 .attr('data-value', value)
                 .text(parse(value))
-
-            // this.selection.current.text(text)
             this.updateTextInStore(value)
         })
+
+        this.$on(constants.tableCellParse, ({prev, curr}) => {
+            this.selection.prev
+                ?.attr('data-value', prev)
+                .text(parse(prev))
+            this.selection.current
+                .attr('data-value', curr)
+                .text(parse(curr))
+            this.updateTextInStore(curr)
+        })
+
         this.$on(constants.formulaDone, () => {
             this.selection.current.focus()
         })
@@ -60,12 +68,12 @@ export class Table extends ExcelComponent {
     selectCell($cell) {
         this.selection.select($cell)
         this.$emit(constants.tableSelect, $cell)
-
-        // console.log($cell.data.value)
-        // this.$emit(constants.formulaInput, $cell.data.value)
-
         const styles = $cell.getStyles(Object.keys(constants.defaultStyles))
         this.$dispatch(actions.changeStyles(styles))
+        this.$emit(constants.tableCellParse, {
+            prev: this.selection.prev?.data.value || "",
+            curr: $cell.data.value || ""
+        })
     }
 
     onKeydown(ev) {
@@ -83,21 +91,23 @@ export class Table extends ExcelComponent {
             const id = this.selection.current.id(true)
             const $next = this.$root.find(nextSelector(ev.key, id))
             this.selectCell($next)
+
         } else if (ev.key === 'Delete') {
 
             if (this.selection.group.length > 1) {
                 this.selection.group.forEach($el => {
-                    $el.text('')
-                    this.$dispatch(actions.changeText({
-                        id: $el.id(),
-                        value: ''
-                    }))
+                    this.clearCell($el)
                 })
             } else {
-                this.selection.current.text('')
-                this.updateTextInStore('')
+                this.clearCell(this.selection.current)
             }
         }
+    }
+
+    clearCell($cell) {
+        $cell.text('')
+        $cell.attr('data-value', '')
+        this.updateTextInStore('')
     }
 
     updateTextInStore(value) {
@@ -108,7 +118,9 @@ export class Table extends ExcelComponent {
     }
 
     onInput(ev) {
-        this.updateTextInStore($(ev.target).text())
+        const $target = $(ev.target)
+        this.updateTextInStore($target.text())
+        $target.attr('data-value', $target.text())
     }
 
     async resizeTable(ev) {

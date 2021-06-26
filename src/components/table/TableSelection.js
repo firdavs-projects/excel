@@ -4,9 +4,11 @@ export class TableSelection {
     constructor() {
         this.group = []
         this.current = null
+        this.prev = null
     }
 
     select($el) {
+        this.prev = this.current
         this.clear()
         $el.focus().addClass(TableSelection.className).addClass('overflow')
         this.group.push($el)

@@ -108,7 +108,7 @@ class Dom {
     }
 
     attr(name, value) {
-        if (value) {
+        if (value || value === '') {
             this.$el.setAttribute(name, value)
             return this
         }
