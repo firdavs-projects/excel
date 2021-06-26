@@ -59,6 +59,13 @@
     color: #111;
     white-space: nowrap;
     outline: none;
+    overflow: hidden;
+
+    &.overflow {
+      overflow: visible;
+      background: white;
+      width: auto;
+    }
 
     &.selected {
       border: none;

@@ -1,5 +1,6 @@
 import {ExcelComponent} from "@core/ExcelComponent";
 import {$} from "@core/dom";
+import *as constants from "@core/constants";
 
 export class Formula extends ExcelComponent {
     static className = 'excel__formula'
@@ -8,6 +9,7 @@ export class Formula extends ExcelComponent {
         super($root, {
             name: 'Formula',
             listeners: ['input', 'keydown'],
+            subscribe: ['currentText'],
             ...options
         });
     }
@@ -22,11 +24,8 @@ export class Formula extends ExcelComponent {
     init() {
         super.init();
         this.$formula = this.$root.find('#formula-input')
-        this.$on('table:select', text => {
-            this.$formula.text(text)
-        })
-        this.$on('table:input', text => {
-            this.$formula.text(text)
+        this.$on(constants.tableSelect, $cell => {
+            this.$formula.text($cell.data.value)
         })
     }
 
@@ -34,11 +33,15 @@ export class Formula extends ExcelComponent {
         const keys = ['Enter', 'Tab']
         if (keys.includes(ev.key)) {
             ev.preventDefault()
-            this.$emit('formula:done')
+            this.$emit(constants.formulaDone)
         }
     }
 
     onInput(event) {
-        this.$emit('formula:input', $(event.target).text())
+        this.$emit(constants.formulaInput, $(event.target).text())
+    }
+
+    storeChanged({currentText}) {
+        this.$formula.text(currentText)
     }
 }

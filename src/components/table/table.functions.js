@@ -30,7 +30,6 @@ export function nextSelector(key, {row, col}) {
         case 'ArrowLeft':
             col = col - 1 < MIN_VALUE ? MIN_VALUE : col - 1
             break
-
     }
     return `[data-id="${row}:${col}"]`
 }
