@@ -22,16 +22,38 @@ export function range(start, end) {
         .map((_, i) => start + i)
 }
 
-export function increaseNum(a, max) {
-    if (+a === +max) {
-        return +a
+export function storage(key, data = null) {
+    if (!data) {
+        return JSON.parse(localStorage.getItem(key))
     }
-    return +a + 1
+    localStorage.setItem(key, JSON.stringify(data))
 }
 
-export function reduceNum(a) {
-    if (+a === 0) {
-        return +a
+export function isEqual(prev, current) {
+    if (typeof prev === 'object' && typeof current === 'object') {
+        return JSON.stringify(prev) === JSON.stringify(current)
     }
-    return +a - 1
+    return prev === current
+}
+
+export function camelToDashCase(str) {
+    return str.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
+}
+
+export function toInlineStyles(styles = {}) {
+    return Object.keys(styles)
+        .map(key => `${camelToDashCase(key)}:${styles[key]}`)
+        .join('; ')
+}
+
+export function debounce(fn, wait) {
+    let timeout
+    return function (...args) {
+        const later = () => {
+            clearTimeout(timeout)
+            fn.apply(this, args)
+        }
+        clearTimeout(timeout)
+        timeout = setTimeout(later, wait)
+    }
 }
