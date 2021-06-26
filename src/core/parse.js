@@ -8,5 +8,3 @@ export function parse(value = '') {
     }
     return value
 }
-
-// lesson 80 bug fix
