@@ -4,7 +4,7 @@ import * as actions from '@/redux/actions';
 import {createTable} from '@/components/table/table.template';
 import {resizeHandler} from '@/components/table/table.resize';
 import {TableSelection} from '@/components/table/TableSelection';
-import * as constants from '@/constants';
+import * as constants from '@/shared/constants';
 import {parse} from '@core/parse';
 import {
   nextSelector, isCell, matrix,

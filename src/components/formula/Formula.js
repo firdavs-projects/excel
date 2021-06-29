@@ -1,6 +1,6 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {$} from '@core/dom';
-import * as constants from '@/constants';
+import * as constants from '@/shared/constants';
 
 export class Formula extends ExcelComponent {
     static className = 'excel__formula'

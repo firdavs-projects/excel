@@ -1,4 +1,4 @@
-import * as constants from '@/constants';
+import * as constants from '@/shared/constants';
 import {clone} from '@core/utils';
 
 const defaultState = {
