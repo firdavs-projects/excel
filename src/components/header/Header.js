@@ -1,7 +1,7 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {changeTitle} from '@/redux/actions';
 import {$} from '@core/dom';
-import * as constants from '@/constants';
+import * as constants from '@/shared/constants';
 import {debounce} from '@core/utils';
 import {ActiveRoute} from '@core/routes/ActiveRoute';
 
