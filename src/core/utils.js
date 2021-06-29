@@ -1,67 +1,68 @@
-//Pure functions
+// Pure functions
 export const capitalize = (string) => {
-    if (typeof string !== "string") {
-        return "";
-    }
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  if (typeof string !== 'string') {
+    return '';
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export const roundNum = (number) => {
-    if (typeof number !== 'number') {
-        return NaN
-    }
-    return Math.floor(number)
+  if (typeof number !== 'number') {
+    return NaN
+  }
+  return Math.floor(number)
 }
 
 export function range(start, end) {
-    if (start > end) {
-        [end, start] = [start, end]
-    }
-    return new Array(end - start + 1)
-        .fill('')
-        .map((_, i) => start + i)
+  if (start > end) {
+    [end, start] = [start, end]
+  }
+  return new Array(end - start + 1)
+      .fill('')
+      .map((_, i) => start + i)
 }
 
 export function storage(key, data = null) {
-    if (!data) {
-        return JSON.parse(localStorage.getItem(key))
-    }
-    localStorage.setItem(key, JSON.stringify(data))
+  if (!data) {
+    return JSON.parse(localStorage.getItem(key))
+  }
+  localStorage.setItem(key, JSON.stringify(data))
 }
 
 export function isEqual(prev, current) {
-    if (typeof prev === 'object' && typeof current === 'object') {
-        return JSON.stringify(prev) === JSON.stringify(current)
-    }
-    return prev === current
+  if (typeof prev === 'object' && typeof current === 'object') {
+    return JSON.stringify(prev) === JSON.stringify(current)
+  }
+  return prev === current
 }
 
 export function camelToDashCase(str) {
-    return str.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
+  return str.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
 }
 
 export function toInlineStyles(styles = {}) {
-    return Object.keys(styles)
-        .map(key => `${camelToDashCase(key)}:${styles[key]}`)
-        .join('; ')
+  return Object.keys(styles)
+      .map(key => `${camelToDashCase(key)}:${styles[key]}`)
+      .join('; ')
 }
 
 export function debounce(fn, wait) {
-    let timeout
-    return function (...args) {
-        const later = () => {
-            clearTimeout(timeout)
-            fn.apply(this, args)
-        }
-        clearTimeout(timeout)
-        timeout = setTimeout(later, wait)
+  let timeout
+  return function(...args) {
+    const later = () => {
+      clearTimeout(timeout)
+      // eslint-disable-next-line no-invalid-this
+      fn.apply(this, args)
     }
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+  }
 }
 
 export function clone(obj) {
-    return JSON.parse((JSON.stringify(obj)))
+  return JSON.parse((JSON.stringify(obj)))
 }
 
 export function preventDefault(event) {
-    event.preventDefault()
+  event.preventDefault()
 }

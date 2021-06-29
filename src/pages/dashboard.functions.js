@@ -1,10 +1,10 @@
-import {storage} from "@core/utils";
+import {storage} from '@core/utils';
 
 function toHtml(key) {
-    const model = storage(key)
-    const created = new Date(+key.split(':')[1])
-    const opened = new Date(model.openedDate)
-    return `
+  const model = storage(key)
+  const created = new Date(+key.split(':')[1])
+  const opened = new Date(model.openedDate)
+  return `
     <li class="db__record">
         <a href="#${key.replace(':', '/')}">${model.title}</a>
         <strong>
@@ -20,26 +20,26 @@ function toHtml(key) {
 }
 
 function getAllKeys() {
-    const keys = []
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i)
-        if (!key.includes('excel')) {
-            continue
-        }
-        keys.push(key)
+  const keys = []
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    if (!key.includes('excel')) {
+      continue
     }
-    return keys
+    keys.push(key)
+  }
+  return keys
 }
 
 export function createTableRecords() {
-    const keys = getAllKeys()
-    if (!keys.length) {
-        return `
-            <br><p style="text-align: center">Вы пока не создали ни одной таблицы </p>
-        `
-    }
-
+  const keys = getAllKeys()
+  if (!keys.length) {
     return `
+      <br><p style="text-align: center">Вы пока не создали ни одной таблицы </p>
+    `
+  }
+
+  return `
         <div class="db__list-header">
           <span class="name">Название</span>
           <span>Дата создания</span>
