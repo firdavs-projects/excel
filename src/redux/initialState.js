@@ -1,7 +1,5 @@
-import {storage} from "@core/utils";
-import * as constants from "@core/constants";
-
-const DB_KEY = 'excel-state'
+import * as constants from "@/constants";
+import {clone} from "@core/utils";
 
 const defaultState = {
     title: constants.defaultTitle,
@@ -11,10 +9,9 @@ const defaultState = {
     stylesState: {},
     currentStyles: constants.defaultStyles,
     currentText: '',
-
-
+    openedDate: new Date().toJSON()
 }
 
-export const initialState = storage(DB_KEY)
-    ? storage(DB_KEY)
-    : defaultState
+export function initialState(state) {
+    return state ? state : clone(defaultState)
+}

@@ -1,5 +1,5 @@
 import {toInlineStyles} from "@core/utils";
-import {defaultStyles} from "@core/constants";
+import {defaultStyles} from "@/constants";
 import {parse} from "@core/parse";
 
 const CODES = {

@@ -20,6 +20,9 @@ export function rootReducer(state, action) {
         case types.APPLY_STYLE:
             return reducers.applyStyleReducer(state, action)
 
+        case types.UPDATE_DATE:
+            return reducers.updateDateReducer(state)
+
         default:
             return state
     }
