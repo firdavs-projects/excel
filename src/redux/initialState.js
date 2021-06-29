@@ -12,14 +12,6 @@ const defaultState = {
     openedDate: new Date().toJSON()
 }
 
-// function normalize(state) {
-//     return {
-//         ...state,
-//         currentStyles: constants.defaultStyles,
-//         currentText: '',
-//     }
-// }
-
 export function initialState(state) {
     return state ? state : clone(defaultState)
 }
