@@ -34,3 +34,9 @@ export function applyStyle(payload) {
         payload
     }
 }
+
+export function updateDate() {
+    return {
+        type: types.UPDATE_DATE
+    }
+}

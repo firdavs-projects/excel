@@ -1,3 +1,5 @@
+import {clone} from "@core/utils";
+
 export function createStore(rootReducer, initialState = {}) {
 
     let state = rootReducer({...initialState}, {type: '__INIT__'})
@@ -17,9 +19,7 @@ export function createStore(rootReducer, initialState = {}) {
             subscribers.forEach(s => s(state))
         },
         getState() {
-            return JSON.parse(JSON.stringify(state))
+            return clone(state)
         }
     }
 }
-
-// Todo => to class

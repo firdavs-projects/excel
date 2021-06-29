@@ -43,3 +43,10 @@ export function applyStyleReducer(state, action) {
         currentStyles: {...state.currentStyles, ...action.payload.value}
     }
 }
+
+export function updateDateReducer(state) {
+    return {
+        ...state,
+        openedDate: new Date().toJSON()
+    }
+}

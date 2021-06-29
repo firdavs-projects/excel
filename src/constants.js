@@ -1,4 +1,4 @@
-export const defaultTitle = 'New Table'
+export const defaultTitle = 'Новая таблица'
 
 export const defaultStyles = {
     textAlign: 'left',
